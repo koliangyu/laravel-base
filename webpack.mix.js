@@ -38,3 +38,8 @@ mix.copyDirectory('node_modules/simple-line-icons/fonts', 'public/vendor/simple-
 mix.js('resources/js/app.js', 'public/backend/js')
    .sass('resources/sass/style.scss', 'public/backend/css')
    .sass('resources/sass/vendors/pace-progress/pace.scss', 'public/vendor/pace-progress/css');
+
+mix.browserSync({
+    port: 8888,
+    proxy: 'localhost:8000'
+});
