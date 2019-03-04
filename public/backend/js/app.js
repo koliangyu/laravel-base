@@ -94,14 +94,14 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
-  * CoreUI v2.1.4 (https://coreui.io)
-  * Copyright 2018 Łukasz Holeczek
+  * CoreUI v2.1.7 (https://coreui.io)
+  * Copyright 2019 Łukasz Holeczek
   * Licensed under MIT (https://coreui.io)
   */
 (function (global, factory) {
    true ? factory(exports, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"), __webpack_require__(/*! perfect-scrollbar */ "./node_modules/perfect-scrollbar/dist/perfect-scrollbar.esm.js")) :
   undefined;
-}(this, (function (exports,$,PerfectScrollbar) { 'use strict';
+}(this, function (exports, $, PerfectScrollbar) { 'use strict';
 
   $ = $ && $.hasOwnProperty('default') ? $['default'] : $;
   PerfectScrollbar = PerfectScrollbar && PerfectScrollbar.hasOwnProperty('default') ? PerfectScrollbar['default'] : PerfectScrollbar;
@@ -121,7 +121,7 @@
   }
 
   var _core = createCommonjsModule(function (module) {
-  var core = module.exports = { version: '2.6.0' };
+  var core = module.exports = { version: '2.6.1' };
   if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
   });
   var _core_1 = _core.version;
@@ -628,7 +628,7 @@
 
   // @@split logic
   _fixReWks('split', 2, function (defined, SPLIT, $split, maybeCallNative) {
-    var internalSplit = $split;
+    var internalSplit;
     if (
       'abbc'[$SPLIT](/(b)*/)[1] == 'c' ||
       'test'[$SPLIT](/(?:)/, -1)[LENGTH] != 4 ||
@@ -674,6 +674,8 @@
       internalSplit = function (separator, limit) {
         return separator === undefined && limit === 0 ? [] : $split.call(this, separator, limit);
       };
+    } else {
+      internalSplit = $split;
     }
 
     return [
@@ -1400,21 +1402,21 @@
 
   /**
    * --------------------------------------------------------------------------
-   * CoreUI (v2.1.4): ajax-load.js
+   * CoreUI (v2.1.7): ajax-load.js
    * Licensed under MIT (https://coreui.io/license)
    * --------------------------------------------------------------------------
    */
 
-  var AjaxLoad = function ($$$1) {
+  var AjaxLoad = function ($) {
     /**
      * ------------------------------------------------------------------------
      * Constants
      * ------------------------------------------------------------------------
      */
     var NAME = 'ajaxLoad';
-    var VERSION = '2.1.4';
+    var VERSION = '2.1.7';
     var DATA_KEY = 'coreui.ajaxLoad';
-    var JQUERY_NO_CONFLICT = $$$1.fn[NAME];
+    var JQUERY_NO_CONFLICT = $.fn[NAME];
     var ClassName = {
       ACTIVE: 'active',
       NAV_PILLS: 'nav-pills',
@@ -1485,12 +1487,12 @@
           body.appendChild(script);
         };
 
-        $$$1.ajax({
+        $.ajax({
           type: 'GET',
           url: config.subpagesDirectory + url,
           dataType: 'html',
           beforeSend: function beforeSend() {
-            $$$1(Selector.VIEW_SCRIPT).remove();
+            $(Selector.VIEW_SCRIPT).remove();
           },
           success: function success(result) {
             var wrapper = document.createElement('div');
@@ -1501,10 +1503,10 @@
             wrapper.querySelectorAll('script').forEach(function (script) {
               return script.parentNode.removeChild(script);
             });
-            $$$1('body').animate({
+            $('body').animate({
               scrollTop: 0
             }, 0);
-            $$$1(element).html(wrapper);
+            $(element).html(wrapper);
 
             if (scripts.length) {
               loadScripts(scripts);
@@ -1519,10 +1521,10 @@
       };
 
       _proto.setUpUrl = function setUpUrl(url) {
-        $$$1(Selector.NAV_LINK).removeClass(ClassName.ACTIVE);
-        $$$1(Selector.NAV_DROPDOWN).removeClass(ClassName.OPEN);
-        $$$1(Selector.NAV_DROPDOWN + ":has(a[href=\"" + url.replace(/^\//, '').split('?')[0] + "\"])").addClass(ClassName.OPEN);
-        $$$1(Selector.NAV_ITEM + " a[href=\"" + url.replace(/^\//, '').split('?')[0] + "\"]").addClass(ClassName.ACTIVE);
+        $(Selector.NAV_LINK).removeClass(ClassName.ACTIVE);
+        $(Selector.NAV_DROPDOWN).removeClass(ClassName.OPEN);
+        $(Selector.NAV_DROPDOWN + ":has(a[href=\"" + url.replace(/^\//, '').split('?')[0] + "\"])").addClass(ClassName.OPEN);
+        $(Selector.NAV_ITEM + " a[href=\"" + url.replace(/^\//, '').split('?')[0] + "\"]").addClass(ClassName.ACTIVE);
         this.loadPage(url);
       };
 
@@ -1532,8 +1534,8 @@
 
       _proto.loadTop = function loadTop(url) {
         window.location = url;
-      }; // Private
-
+      } // Private
+      ;
 
       _proto._getConfig = function _getConfig(config) {
         config = Object.assign({}, Default, config);
@@ -1543,7 +1545,7 @@
       _proto._addEventListeners = function _addEventListeners() {
         var _this = this;
 
-        $$$1(document).on(Event.CLICK, Selector.NAV_LINK + "[href!=\"#\"]", function (event) {
+        $(document).on(Event.CLICK, Selector.NAV_LINK + "[href!=\"#\"]", function (event) {
           event.preventDefault();
           event.stopPropagation();
 
@@ -1555,18 +1557,18 @@
             _this.setUpUrl(event.currentTarget.getAttribute('href'));
           }
         });
-      }; // Static
-
+      } // Static
+      ;
 
       AjaxLoad._jQueryInterface = function _jQueryInterface(config) {
         return this.each(function () {
-          var data = $$$1(this).data(DATA_KEY);
+          var data = $(this).data(DATA_KEY);
 
           var _config = typeof config === 'object' && config;
 
           if (!data) {
             data = new AjaxLoad(this, _config);
-            $$$1(this).data(DATA_KEY, data);
+            $(this).data(DATA_KEY, data);
           }
         });
       };
@@ -1592,11 +1594,11 @@
      */
 
 
-    $$$1.fn[NAME] = AjaxLoad._jQueryInterface;
-    $$$1.fn[NAME].Constructor = AjaxLoad;
+    $.fn[NAME] = AjaxLoad._jQueryInterface;
+    $.fn[NAME].Constructor = AjaxLoad;
 
-    $$$1.fn[NAME].noConflict = function () {
-      $$$1.fn[NAME] = JQUERY_NO_CONFLICT;
+    $.fn[NAME].noConflict = function () {
+      $.fn[NAME] = JQUERY_NO_CONFLICT;
       return AjaxLoad._jQueryInterface;
     };
 
@@ -1605,7 +1607,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * CoreUI (v2.1.4): toggle-classes.js
+   * CoreUI (v2.1.7): toggle-classes.js
    * Licensed under MIT (https://coreui.io/license)
    * --------------------------------------------------------------------------
    */
@@ -1630,23 +1632,23 @@
 
   /**
    * --------------------------------------------------------------------------
-   * CoreUI (v2.1.4): aside-menu.js
+   * CoreUI (v2.1.7): aside-menu.js
    * Licensed under MIT (https://coreui.io/license)
    * --------------------------------------------------------------------------
    */
 
-  var AsideMenu = function ($$$1) {
+  var AsideMenu = function ($) {
     /**
      * ------------------------------------------------------------------------
      * Constants
      * ------------------------------------------------------------------------
      */
     var NAME = 'aside-menu';
-    var VERSION = '2.1.4';
+    var VERSION = '2.1.7';
     var DATA_KEY = 'coreui.aside-menu';
     var EVENT_KEY = "." + DATA_KEY;
     var DATA_API_KEY = '.data-api';
-    var JQUERY_NO_CONFLICT = $$$1.fn[NAME];
+    var JQUERY_NO_CONFLICT = $.fn[NAME];
     var Event = {
       CLICK: 'click',
       LOAD_DATA_API: "load" + EVENT_KEY + DATA_API_KEY,
@@ -1678,18 +1680,18 @@
 
       // Private
       _proto._addEventListeners = function _addEventListeners() {
-        $$$1(document).on(Event.CLICK, Selector.ASIDE_MENU_TOGGLER, function (event) {
+        $(document).on(Event.CLICK, Selector.ASIDE_MENU_TOGGLER, function (event) {
           event.preventDefault();
           event.stopPropagation();
-          var toggle = event.currentTarget.dataset ? event.currentTarget.dataset.toggle : $$$1(event.currentTarget).data('toggle');
+          var toggle = event.currentTarget.dataset ? event.currentTarget.dataset.toggle : $(event.currentTarget).data('toggle');
           toggleClasses(toggle, ShowClassNames);
         });
-      }; // Static
-
+      } // Static
+      ;
 
       AsideMenu._jQueryInterface = function _jQueryInterface() {
         return this.each(function () {
-          var $element = $$$1(this);
+          var $element = $(this);
           var data = $element.data(DATA_KEY);
 
           if (!data) {
@@ -1715,8 +1717,8 @@
      */
 
 
-    $$$1(window).on(Event.LOAD_DATA_API, function () {
-      var asideMenu = $$$1(Selector.ASIDE_MENU);
+    $(window).on(Event.LOAD_DATA_API, function () {
+      var asideMenu = $(Selector.ASIDE_MENU);
 
       AsideMenu._jQueryInterface.call(asideMenu);
     });
@@ -1726,11 +1728,11 @@
      * ------------------------------------------------------------------------
      */
 
-    $$$1.fn[NAME] = AsideMenu._jQueryInterface;
-    $$$1.fn[NAME].Constructor = AsideMenu;
+    $.fn[NAME] = AsideMenu._jQueryInterface;
+    $.fn[NAME].Constructor = AsideMenu;
 
-    $$$1.fn[NAME].noConflict = function () {
-      $$$1.fn[NAME] = JQUERY_NO_CONFLICT;
+    $.fn[NAME].noConflict = function () {
+      $.fn[NAME] = JQUERY_NO_CONFLICT;
       return AsideMenu._jQueryInterface;
     };
 
@@ -1860,7 +1862,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * CoreUI Utilities (v2.1.4): get-css-custom-properties.js
+   * CoreUI Utilities (v2.1.7): get-css-custom-properties.js
    * Licensed under MIT (https://coreui.io/license)
    * @returns {string} css custom property name
    * --------------------------------------------------------------------------
@@ -1928,23 +1930,23 @@
 
   /**
    * --------------------------------------------------------------------------
-   * CoreUI (v2.1.4): sidebar.js
+   * CoreUI (v2.1.7): sidebar.js
    * Licensed under MIT (https://coreui.io/license)
    * --------------------------------------------------------------------------
    */
 
-  var Sidebar = function ($$$1) {
+  var Sidebar = function ($) {
     /**
      * ------------------------------------------------------------------------
      * Constants
      * ------------------------------------------------------------------------
      */
     var NAME = 'sidebar';
-    var VERSION = '2.1.4';
+    var VERSION = '2.1.7';
     var DATA_KEY = 'coreui.sidebar';
     var EVENT_KEY = "." + DATA_KEY;
     var DATA_API_KEY = '.data-api';
-    var JQUERY_NO_CONFLICT = $$$1.fn[NAME];
+    var JQUERY_NO_CONFLICT = $.fn[NAME];
     var Default = {
       transition: 400
     };
@@ -2062,7 +2064,7 @@
       };
 
       _proto.setActiveLink = function setActiveLink() {
-        $$$1(Selector.NAVIGATION).find(Selector.NAV_LINK).each(function (key, value) {
+        $(Selector.NAVIGATION).find(Selector.NAV_LINK).each(function (key, value) {
           var link = value;
           var cUrl;
 
@@ -2076,15 +2078,15 @@
             cUrl = cUrl.slice(0, -1);
           }
 
-          if ($$$1($$$1(link))[0].href === cUrl) {
-            $$$1(link).addClass(ClassName.ACTIVE).parents(Selector.NAV_DROPDOWN_ITEMS).add(link).each(function (key, value) {
+          if ($($(link))[0].href === cUrl) {
+            $(link).addClass(ClassName.ACTIVE).parents(Selector.NAV_DROPDOWN_ITEMS).add(link).each(function (key, value) {
               link = value;
-              $$$1(link).parent().addClass(ClassName.OPEN);
+              $(link).parent().addClass(ClassName.OPEN);
             });
           }
         });
-      }; // Private
-
+      } // Private
+      ;
 
       _proto._addMediaQuery = function _addMediaQuery() {
         var sm = getStyle('--breakpoint-sm');
@@ -2140,45 +2142,45 @@
       _proto._addEventListeners = function _addEventListeners() {
         var _this2 = this;
 
-        $$$1(document).on(Event.CLICK, Selector.BRAND_MINIMIZER, function (event) {
+        $(document).on(Event.CLICK, Selector.BRAND_MINIMIZER, function (event) {
           event.preventDefault();
           event.stopPropagation();
-          $$$1(Selector.BODY).toggleClass(ClassName.BRAND_MINIMIZED);
+          $(Selector.BODY).toggleClass(ClassName.BRAND_MINIMIZED);
         });
-        $$$1(document).on(Event.CLICK, Selector.NAV_DROPDOWN_TOGGLE, function (event) {
+        $(document).on(Event.CLICK, Selector.NAV_DROPDOWN_TOGGLE, function (event) {
           event.preventDefault();
           event.stopPropagation();
           var dropdown = event.target;
-          $$$1(dropdown).parent().toggleClass(ClassName.OPEN);
+          $(dropdown).parent().toggleClass(ClassName.OPEN);
 
           _this2.perfectScrollbar(Event.UPDATE);
         });
-        $$$1(document).on(Event.CLICK, Selector.SIDEBAR_MINIMIZER, function (event) {
+        $(document).on(Event.CLICK, Selector.SIDEBAR_MINIMIZER, function (event) {
           event.preventDefault();
           event.stopPropagation();
-          $$$1(Selector.BODY).toggleClass(ClassName.SIDEBAR_MINIMIZED);
+          $(Selector.BODY).toggleClass(ClassName.SIDEBAR_MINIMIZED);
 
           _this2.perfectScrollbar(Event.TOGGLE);
         });
-        $$$1(document).on(Event.CLICK, Selector.SIDEBAR_TOGGLER, function (event) {
+        $(document).on(Event.CLICK, Selector.SIDEBAR_TOGGLER, function (event) {
           event.preventDefault();
           event.stopPropagation();
-          var toggle = event.currentTarget.dataset ? event.currentTarget.dataset.toggle : $$$1(event.currentTarget).data('toggle');
+          var toggle = event.currentTarget.dataset ? event.currentTarget.dataset.toggle : $(event.currentTarget).data('toggle');
           toggleClasses(toggle, ShowClassNames);
 
           _this2._toggleClickOut();
         });
-        $$$1(Selector.NAVIGATION + " > " + Selector.NAV_ITEM + " " + Selector.NAV_LINK + ":not(" + Selector.NAV_DROPDOWN_TOGGLE + ")").on(Event.CLICK, function () {
+        $(Selector.NAVIGATION + " > " + Selector.NAV_ITEM + " " + Selector.NAV_LINK + ":not(" + Selector.NAV_DROPDOWN_TOGGLE + ")").on(Event.CLICK, function () {
           _this2._removeClickOut();
 
           document.body.classList.remove('sidebar-show');
         });
-      }; // Static
-
+      } // Static
+      ;
 
       Sidebar._jQueryInterface = function _jQueryInterface() {
         return this.each(function () {
-          var $element = $$$1(this);
+          var $element = $(this);
           var data = $element.data(DATA_KEY);
 
           if (!data) {
@@ -2204,8 +2206,8 @@
      */
 
 
-    $$$1(window).on(Event.LOAD_DATA_API, function () {
-      var sidebar = $$$1(Selector.SIDEBAR);
+    $(window).on(Event.LOAD_DATA_API, function () {
+      var sidebar = $(Selector.SIDEBAR);
 
       Sidebar._jQueryInterface.call(sidebar);
     });
@@ -2215,11 +2217,11 @@
      * ------------------------------------------------------------------------
      */
 
-    $$$1.fn[NAME] = Sidebar._jQueryInterface;
-    $$$1.fn[NAME].Constructor = Sidebar;
+    $.fn[NAME] = Sidebar._jQueryInterface;
+    $.fn[NAME].Constructor = Sidebar;
 
-    $$$1.fn[NAME].noConflict = function () {
-      $$$1.fn[NAME] = JQUERY_NO_CONFLICT;
+    $.fn[NAME].noConflict = function () {
+      $.fn[NAME] = JQUERY_NO_CONFLICT;
       return Sidebar._jQueryInterface;
     };
 
@@ -2228,7 +2230,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * CoreUI Utilities (v2.1.4): hex-to-rgb.js
+   * CoreUI Utilities (v2.1.7): hex-to-rgb.js
    * Licensed under MIT (https://coreui.io/license)
    * --------------------------------------------------------------------------
    */
@@ -2264,7 +2266,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * CoreUI Utilities (v2.1.4): hex-to-rgba.js
+   * CoreUI Utilities (v2.1.7): hex-to-rgba.js
    * Licensed under MIT (https://coreui.io/license)
    * --------------------------------------------------------------------------
    */
@@ -2331,7 +2333,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * CoreUI (v2.1.4): rgb-to-hex.js
+   * CoreUI (v2.1.7): rgb-to-hex.js
    * Licensed under MIT (https://coreui.io/license)
    * --------------------------------------------------------------------------
    */
@@ -2360,17 +2362,17 @@
 
   /**
    * --------------------------------------------------------------------------
-   * CoreUI (v2.1.4): index.js
+   * CoreUI (v2.1.7): index.js
    * Licensed under MIT (https://coreui.io/license)
    * --------------------------------------------------------------------------
    */
 
-  (function ($$$1) {
-    if (typeof $$$1 === 'undefined') {
+  (function ($) {
+    if (typeof $ === 'undefined') {
       throw new TypeError('CoreUI\'s JavaScript requires jQuery. jQuery must be included before CoreUI\'s JavaScript.');
     }
 
-    var version = $$$1.fn.jquery.split(' ')[0].split('.');
+    var version = $.fn.jquery.split(' ')[0].split('.');
     var minMajor = 1;
     var ltMajor = 2;
     var minMinor = 9;
@@ -2392,7 +2394,7 @@
 
   Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=coreui.js.map
 
 
