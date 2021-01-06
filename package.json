@@ -20,7 +20,7 @@
         "simple-line-icons": "2.4.1"
     },
     "devDependencies": {
-        "axios": "^0.18",
+        "axios": "^0.21",
         "browser-sync": "^2.26.3",
         "browser-sync-webpack-plugin": "^2.2.2",
         "concurrently": "^4.1.0",
