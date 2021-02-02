@@ -11,5 +11,8 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 
+/public/mix-manifest.json
+/public/backend/css
+/public/backend/js
 /public/vendor
 /.vscode
