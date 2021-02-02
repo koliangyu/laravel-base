@@ -7,11 +7,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Laravel</title>
     <!-- Icons-->
-    {!! HTML::style("/vendor/font-awesome/css/font-awesome.min.css") !!}
-    {!! HTML::style("/vendor/simple-line-icons/css/simple-line-icons.css") !!}
+    {!! Html::style("/vendor/font-awesome/css/font-awesome.min.css") !!}
+    {!! Html::style("/vendor/simple-line-icons/css/simple-line-icons.css") !!}
     <!-- Main styles for this application-->
-    {!! HTML::style("/backend/css/style.css") !!}
-    {!! HTML::style("/vendor/pace-progress/css/pace.css") !!}
+    {!! Html::style("/backend/css/style.css") !!}
+    {!! Html::style("/vendor/pace-progress/css/pace.css") !!}
     @stack('css')
   </head>
   <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
@@ -324,13 +324,13 @@
     @include('backend/layout/footer')
 
     <!-- CoreUI and necessary plugins-->
-    {!! HTML::script('vendor/jquery/jquery.min.js') !!}
-    {!! HTML::script('vendor/popper.js/popper.min.js') !!}
-    {!! HTML::script('vendor/bootstrap/bootstrap.min.js') !!}
-    {!! HTML::script('vendor/pace-progress/pace.min.js') !!}
+    {!! Html::script('vendor/jquery/jquery.min.js') !!}
+    {!! Html::script('vendor/popper.js/popper.min.js') !!}
+    {!! Html::script('vendor/bootstrap/bootstrap.min.js') !!}
+    {!! Html::script('vendor/pace-progress/pace.min.js') !!}
 
     <!-- Plugins and scripts required by this view-->
-    {!! HTML::script('backend/js/app.js') !!}
+    {!! Html::script('backend/js/app.js') !!}
 
     @stack('scripts')
 
