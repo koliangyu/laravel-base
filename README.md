@@ -3,7 +3,7 @@
 ### The base for CoreUI Bootstrap Admin Template
 
 Laravel Base is a Laravel application that adds Core UI Bootstrap management templates to customize the project.
-Created with Laravel 6.x.
+Created with Laravel 9.x.
 
 ## Features
 

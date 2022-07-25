@@ -6,7 +6,7 @@ const mix = require('laravel-mix');
  |--------------------------------------------------------------------------
  |
  | Mix provides a clean, fluent API for defining some Webpack build steps
- | for your Laravel application. By default, we are compiling the Sass
+ | for your Laravel applications. By default, we are compiling the CSS
  | file for the application as well as bundling up all the JS files.
  |
  */
@@ -36,8 +36,8 @@ mix.copyDirectory('node_modules/simple-line-icons/fonts', 'public/vendor/simple-
  |--------------------------------------------------------------------------
  */
 mix.js('resources/js/app.js', 'public/backend/js')
-   .sass('resources/sass/style.scss', 'public/backend/css')
-   .sass('resources/sass/vendors/pace-progress/pace.scss', 'public/vendor/pace-progress/css');
+    .sass('resources/sass/style.scss', 'public/backend/css')
+    .sass('resources/sass/vendors/pace-progress/pace.scss', 'public/vendor/pace-progress/css');
 
 mix.browserSync({
     port: 8888,
