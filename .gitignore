@@ -14,8 +14,9 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
-
 /public/mix-manifest.json
 /public/backend/css
 /public/backend/js
 /public/vendor
+composer.lock
+package-lock.json
