@@ -5,7 +5,7 @@ window._ = require('lodash');
  */
 
 try {
-    require('@coreui/coreui');
+    window.coreui = require('@coreui/coreui');
 } catch (e) {}
 
 /**
